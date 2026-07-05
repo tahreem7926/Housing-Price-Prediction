@@ -1,8 +1,8 @@
 # Housing Price Prediction
 ### Predicting residential property prices using real estate data from Zameen.com
 
-**Tools:** Python · NumPy · Pandas · Matplotlib  
-**Model:** Linear Regression via Gradient Descent  
+**Tools:** Python · NumPy · Pandas · Matplotlib  . Scikit-learn . Jupyter Notebook . Zameen.com (data source)
+**Model:** Linear Regression via Gradient Descent . Random Forest Regressor
 **Dataset:** 1,005 property listings scraped directly from Zameen.com, Islamabad
 
 ### Overview
@@ -16,7 +16,7 @@ Two models are trained on the same data set to compare the results of the model
 | Training samples | ~804 | ~804 |
 | Test samples | ~201 | ~201 |
 | R² Score | 0.794 | 0.808 |
-| RMSE (PKR) | ~19,694,940 | ~26,881,830 |
+| RMSE (PKR) | ~27852850 | ~26,881,830 |
 | Feature scaling needed | Yes | No |
 | Interpretability | Coefficient weights | Feature importance scores |
 
@@ -67,5 +67,45 @@ on their observed price distributions:
 
 This reduces 230+ columns to 8 binary features while preserving the
 location signal that actually matters for pricing.
+
+### Preventing Data Leakage
+Feature normalization only uses mean and standard deviation only from the training set. Computing this from the whole dataset would make the model "see" the dataset during training.
+
+### File Structure
+```
+Housing_Price_Prediction/
+│
+├── islamabad_housing_price_prediction.ipynb   # Main notebook
+├── zameen_raw.csv                             # Raw scraped data
+├── cleaned_data.csv                           # After preprocessing
+├── train_data.csv                             # 80% split
+├── test_data.csv                              # 20% split
+└── README.md
+```
+### Key Points
+- Real estate data requires substantial domain knowledge to clean well. Knowing that Marla and Kanal are Pakistani units, and that DHA phases price differently from G-sector blocks, directly shaped the feature engineering.
+- Gradient descent is sensitive to feature scale in a way that tree models are not. Normalisation transformed a poorly-converging model into a proper-converging one.
+- The gap between a linear and an ensemble model on this dataset shows up where linear regression struggles most: properties at price extremes, and location interactions with area that don't scale linearly.
+- Reducing 230 location strings to 8 parent categories, rather than dropping location or encoding it raw, was the single biggest improvement to both models' performance.
+
+### How to run
+#### Requirements
+```
+Python 3.8+
+pandas
+numpy
+matplotlin
+scikit-learn
+```
+#### Install Dependencies
+```
+pip install pandas numpy matplotlib scikit-learn
+```
+#### Run the notebook
+```
+jupyter notebook islamabad_housing_price_prediction.ipynb
+```
+The notebook saves all the CSVs locally. No manual inputs required.
+  
 
 
