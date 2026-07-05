@@ -21,7 +21,7 @@ Two models are trained on the same data set to compare the results of the model
 | Interpretability | Coefficient weights | Feature importance scores |
 
 ### Data Collection
-The dataset was scrapped directly from the website `Zameen.com` using a browser-based web scrapper extension. The data contains approx. 1005 proerty records across 26 columns.
+The dataset was scraped directly from the website `Zameen.com` using a browser-based web scraper extension. The data contains approx. 1005 property records across 26 columns.
 
 ### Pipeline Overview 
 ```
