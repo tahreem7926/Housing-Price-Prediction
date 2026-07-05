@@ -5,6 +5,65 @@
 **Model:** Linear Regression via Gradient Descent  
 **Dataset:** 1,005 property listings scraped directly from Zameen.com, Islamabad
 
+### Overview
+Two models are trained on the same data set to compare the results of the model
+**Linear Regression via Gradient Descent** is implemented using Numpy Library.
+**Random Forest Regressior** is built using scikit-learn which captures the non-linear trend that the linear regression model does not.
 
-This project builds a housing price prediction model without using any
-machine learning libraries for the core algorithm. This project just uses basic Gradient Descent Algorithm.
+### Results 
+| Metric | Gradient Descent | Random Forest |
+|---|---|---|
+| Training samples | ~804 | ~804 |
+| Test samples | ~201 | ~201 |
+| R² Score | 0.794 | 0.808 |
+| RMSE (PKR) | ~19,694,940 | ~26,881,830 |
+| Feature scaling needed | Yes | No |
+| Interpretability | Coefficient weights | Feature importance scores |
+
+### Data Collection
+The dataset was scrapped directly from the website `Zameen.com` using a browser-based web scrapper extension. The data contains approx. 1005 proerty records across 26 columns.
+
+### Pipeline Overview 
+Raw CSV (1,005 rows, hashed columns)
+    ↓
+Feature selection & renaming
+    ↓
+Unit conversion  →  Area: Marla/Kanal → sq ft
+                →  Price: Lakh/Crore → PKR
+    ↓
+Outlier removal  →  IQR method on all numeric columns
+    ↓
+Location engineering  →  230+ strings → 8 parent categories
+    ↓
+One-hot encoding
+    ↓
+Train/test split  →  80% train / 20% test (shuffled, seed=42)
+    ↓
+Feature normalisation  →  Z-score (train stats only — no leakage)
+    ↓
+Model training  →  Gradient Descent (5,000 iterations, lr=0.001)
+                →  Random Forest (200 trees)
+    ↓
+Evaluation  →  R², RMSE, actual vs predicted plots, error distribution
+
+### Location Feature Engineering 
+With 230+ unique location strings, one-hot encoding each one directly
+would create 230+ binary columns, most containing only 1–2 listings,
+making them statistically meaningless and prone to overfitting.
+
+Instead, we group locations into 8 meaningful parent categories based
+on their observed price distributions:
+
+| Category | Rationale |
+|---|---|
+| `F-5` through `F-12` | F-series sectors show high within-sector variation; kept separate |
+| `G-6` through `G-14` | Same reasoning for G-series |
+| `DHA` | Consistent pricing across DHA phases |
+| `Bahria` | Consistent pricing across Bahria phases |
+| `Gulberg`, `Soan Garden`, `PWD`, `Naval Anchorage` | Distinct price tiers |
+| `Other` | Remaining locations with insufficient data |
+
+This reduces 230+ columns to 8 binary features while preserving the
+location signal that actually matters for pricing.
+
+
