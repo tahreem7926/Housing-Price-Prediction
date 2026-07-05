@@ -8,7 +8,7 @@
 ### Overview
 Two models are trained on the same data set to compare the results of the model
 **Linear Regression via Gradient Descent** is implemented using Numpy Library.
-**Random Forest Regressior** is built using scikit-learn which captures the non-linear trend that the linear regression model does not.
+**Random Forest Regressor** is built using scikit-learn which captures the non-linear trend that the linear regression model does not.
 
 ### Results 
 | Metric | Gradient Descent | Random Forest |
