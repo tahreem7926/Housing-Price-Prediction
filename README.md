@@ -24,6 +24,7 @@ Two models are trained on the same data set to compare the results of the model
 The dataset was scrapped directly from the website `Zameen.com` using a browser-based web scrapper extension. The data contains approx. 1005 proerty records across 26 columns.
 
 ### Pipeline Overview 
+```
 Raw CSV (1,005 rows, hashed columns)
     ↓
 Feature selection & renaming
@@ -45,6 +46,7 @@ Model training  →  Gradient Descent (5,000 iterations, lr=0.001)
                 →  Random Forest (200 trees)
     ↓
 Evaluation  →  R², RMSE, actual vs predicted plots, error distribution
+```
 
 ### Location Feature Engineering 
 With 230+ unique location strings, one-hot encoding each one directly
