@@ -2,7 +2,7 @@
 ### Predicting residential property prices using real estate data from Zameen.com
 
 **Tools:** Python · NumPy · Pandas · Matplotlib  . Scikit-learn . Jupyter Notebook . Zameen.com
-**Model:** Linear Regression via Gradient Descent . Random Forest Regressor
+**Model:** Linear Regression via Gradient Descent . Random Forest Regressor             
 **Dataset:** 1,005 property listings scraped directly from Zameen.com, Islamabad
 
 ### Overview
