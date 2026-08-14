@@ -117,8 +117,16 @@ Housing_Price_Prediction/
 ├── cleaned_data.csv                           # After preprocessing
 ├── train_data.csv                             # 80% split
 ├── test_data.csv                              # 20% split
+├── api.py                                      # FastAPI serving layer
+├── requirements.txt                            # API dependencies
+├── test_api.py                                 # Quick manual API test script
+├── model_coeff.npy                             # Trained gradient-descent coefficients
+├── x_mean.npy                                  # Feature means (for normalisation)
+├── x_std.npy                                   # Feature std devs (for normalisation)
+├── feature_columns.json                        # Exact feature order used at training time
 └── README.md
 ```
+
 ### Key Points
 - Real estate data requires substantial domain knowledge to clean well. Knowing that Marla and Kanal are Pakistani units, and that DHA phases price differently from G-sector blocks, directly shaped the feature engineering.
 - Gradient descent is sensitive to feature scale in a way that tree models are not. Normalisation transformed a poorly-converging model into a proper-converging one.
